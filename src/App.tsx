@@ -1,34 +1,40 @@
+import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react'
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
+import { AuthModal } from './components/AuthModal/AuthModal'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [showAuthModal, setShowAuthModal] = useState(false)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="app">
+      <header>
+        <h1>LevelUpArchive</h1>
+        <div className="auth-buttons">
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+          <SignedOut>
+            <button className="sign-in-button" onClick={() => setShowAuthModal(true)}>
+              Sign In
+            </button>
+          </SignedOut>
+        </div>
+      </header>
+
+      <main>
+        <div className="game-dashboard">
+          <h2>My Games Library</h2>
+          {/* We'll add game components here later */}
+        </div>
+      </main>
+
+      <AuthModal 
+        isOpen={showAuthModal} 
+        onClose={() => setShowAuthModal(false)} 
+      />
+    </div>
   )
 }
 
