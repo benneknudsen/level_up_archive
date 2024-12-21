@@ -8,3 +8,9 @@
 body {
   @apply bg-bg-dark text-white;
 }
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+

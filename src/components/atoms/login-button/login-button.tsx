@@ -1,22 +1,15 @@
-import { useState } from 'react'
-import { AuthModal } from '../../molecules/auth-modal/auth-modal'
+import React, { useContext } from 'react';
+import { AuthModalContext } from '../../../main';
 
-export const LoginButton = () => {
-  const [showAuthModal, setShowAuthModal] = useState(false)
+export const LoginButton: React.FC = () => {
+  const { openAuthModal } = useContext(AuthModalContext);
 
   return (
-    <>
-      <button 
-        className="bg-accent-blue text-black px-4 py-2 rounded-game-card 
-                   hover:bg-opacity-80 transition-colors duration-300"
-        onClick={() => setShowAuthModal(true)}
-      >
-        Sign In
-      </button>
-      <AuthModal 
-        isOpen={showAuthModal} 
-        onClose={() => setShowAuthModal(false)} 
-      />
-    </>
-  )
-}
+    <button 
+      onClick={openAuthModal}
+      className="bg-accent-blue text-white px-4 py-2 rounded-lg hover:bg-opacity-90"
+    >
+      Login
+    </button>
+  );
+};
