@@ -1,12 +1,18 @@
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'ClashGrotesk';
+  src: url('/src/assets/fonts/ClashGrotesk-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Optional: Add any global styles here */
 body {
-  @apply bg-bg-dark text-white;
+  @apply bg-bg-dark text-white font-['ClashGrotesk'];
 }
 
 /* Smooth scrolling */
@@ -14,3 +20,28 @@ html {
   scroll-behavior: smooth;
 }
 
+@layer base {
+  .dark {
+    --scrollbar-bg: var(--black-b-color);
+    --scrollbar-primary: var(--gray-d2-color);
+    --scrollbar-primary-hover: var(--white-b-color);
+    --current-color: var(--white-b-color);
+    --inverted-color: var(--black-b-color);
+  }
+
+  .yellowTheme {
+    --black-b-color: #10100e;
+    --gray-d3-color: #191815;
+    --gray-d2-color: #30302b;
+    --gray-d1-color: #606055;
+    --gray-b-color: #c0c0ab;
+    --gray-l1-color: #e8e8cf;
+    --gray-l2-color: #f8f8dd;
+    --white-b-color: #FFFFE3;
+    --theme-b-color: #FFFFE3;
+  }
+}
+
+:root {
+  @apply dark yellowTheme;
+}

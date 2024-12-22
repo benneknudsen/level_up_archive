@@ -15,8 +15,7 @@ module.exports = {
       },
       fontFamily: {
         // Make Playfair Display the default font
-        'sans': ['Playfair Display', 'ui-serif', 'serif'],
-        'game': ['Playfair Display', 'serif'],
+        'clash-grotesk': ['ClashGrotesk', 'sans-serif'],
         'VT323': ['VT323', 'monospace'],
         'playfair': ['Playfair Display', 'serif'],
       },
@@ -47,7 +46,8 @@ module.exports = {
     },
     // Override the default font family at the theme level
     fontFamily: {
-      'sans': ['Playfair Display', 'ui-serif', 'serif'],
+      'sans': ['ClashGrotesk', 'sans-serif'],
+      'clash-grotesk': ['ClashGrotesk', 'sans-serif'],
     }
   },
   plugins: [],

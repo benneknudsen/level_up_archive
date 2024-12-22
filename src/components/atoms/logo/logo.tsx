@@ -1,13 +1,21 @@
 import React from 'react';
 
 interface LogoProps {
-  className?: string;
+  logoClassName?: string;
+  textClassName?: string;
 }
 
-export const Logo: React.FC<LogoProps> = ({ className }) => {
+export const Logo: React.FC<LogoProps> = ({ 
+  logoClassName = '', 
+  textClassName = '' 
+}) => {
   return (
-    <div className={`text-4xl animate-logo-glow font-VT323 ${className}`}>
-      <span className="text-success-green">LevelUpArchive</span>
+    <div className={`text-3xl animate-logo-glow font-sans ${logoClassName}`}>
+      <span className={`text-[var(--current-color)] ${textClassName}`}>
+        LevelUpArchive
+      </span>
     </div>
   );
 };
+
+export default Logo;

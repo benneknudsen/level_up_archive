@@ -5,7 +5,7 @@ import { VideoGameSearch } from '@/components/molecules/search/video-game-search
 
 export const Welcome: React.FC = () => {
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center">
+    <div className="min-h-screen flex flex-col items-center justify-center dark yellowTheme">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center opacity-30" 
@@ -19,3 +19,5 @@ export const Welcome: React.FC = () => {
     </div>
   );
 };
+
+export default Welcome;
