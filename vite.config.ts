@@ -16,21 +16,23 @@ export default defineConfig(({ mode }) => {
     server: {
       proxy: {
         '/igdb': {
-          target: 'https://api.igdb.com/v4',
+          target: 'https://api.igdb.com',
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/igdb/, ''),
+          rewrite: (path) => path.replace(/^\/igdb/, '/v4'),
           configure: (proxy) => {
-            proxy.on('proxyReq', (proxyReq) => {
+            proxy.on('proxyReq', (proxyReq, req) => {
+              console.log('Proxy Request:', {
+                method: req.method,
+                url: req.url,
+                headers: req.headers
+              });
+              
               // Safely add headers with fallback
               const clientId = env.VITE_IGDB_CLIENT_ID || '';
               const accessToken = env.VITE_IGDB_ACCESS_TOKEN || '';
               
-              if (clientId) {
-                proxyReq.setHeader('Client-ID', clientId);
-              }
-              if (accessToken) {
-                proxyReq.setHeader('Authorization', `Bearer ${accessToken}`);
-              }
+              proxyReq.setHeader('Client-ID', clientId);
+              proxyReq.setHeader('Authorization', `Bearer ${accessToken}`);
             });
           }
         }

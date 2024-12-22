@@ -11,21 +11,25 @@ export interface VideoGame {
 
 export const searchVideoGames = async (query: string): Promise<VideoGame[]> => {
   try {
-    // Attempt API call using proxy
+    console.log('Attempting IGDB Search:', {
+      query,
+      clientId: import.meta.env.VITE_IGDB_CLIENT_ID,
+      accessTokenPresent: !!import.meta.env.VITE_IGDB_ACCESS_TOKEN
+    });
+
     const response = await axios.post('/igdb/games', 
-      `search "${query}"; 
-      fields name, cover.url, summary; 
-      limit 5;`,
+      `search "${query}"; fields name, cover.url, summary; limit 5;`,
       {
         headers: {
           'Content-Type': 'text/plain',
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'Client-ID': import.meta.env.VITE_IGDB_CLIENT_ID,
+          'Authorization': `Bearer ${import.meta.env.VITE_IGDB_ACCESS_TOKEN}`
         },
         timeout: 10000
       }
     );
 
-    // Log successful response details
     console.log('IGDB Search Response:', {
       status: response.status,
       dataLength: response.data?.length || 0,
@@ -34,7 +38,6 @@ export const searchVideoGames = async (query: string): Promise<VideoGame[]> => {
 
     return response.data || [];
   } catch (error) {
-    // Comprehensive error logging
     if (axios.isAxiosError(error)) {
       console.error('Detailed Axios Error:', {
         message: error.message,
@@ -49,11 +52,7 @@ export const searchVideoGames = async (query: string): Promise<VideoGame[]> => {
           headers: error.config?.headers
         }
       });
-    } else {
-      console.error('Unexpected Error:', error);
     }
-
-    // Return empty array to prevent breaking the UI
-    return [];
+    throw error;
   }
 };
